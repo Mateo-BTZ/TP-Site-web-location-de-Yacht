@@ -1,0 +1,861 @@
+// --------------------------------
+
+// Custom Style - your bespoke style
+
+.bg-img {
+    background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('../images/port.jpg');
+    height: 500px;
+}
+
+.form {
+    margin: 0;
+    position: absolute;
+    top: 30%;
+    right: 40%;
+    
+}
+
+.filtrer {
+    border: 2px solid black;
+    width: 1000px;
+    height: 125px;
+    margin: 0 auto;
+}
+
+.filtrerdeux {
+    border: 2px solid black;
+    width: 1000px;
+    height: 90px;
+    margin: 0 auto;
+}
+
+#sidebar {
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    height: 900px;
+    word-wrap: break-word;
+    margin-left: 5px;
+
+}
+
+.column {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
+
+
+
+
+/* -------------------------------- 
+
+File#: _1_card
+Title: Card
+Descr: Container of information used as teaser for further content exploration
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+.card {
+    background-color: var(--color-bg);
+    box-shadow: var(--shadow-sm);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+  
+  .card__img {
+    img {
+      display: block;
+      width: 100%;
+    }
+  }
+  
+  .card__content {
+    padding: var(--space-xs);
+  }
+  
+  // --link
+  .card--is-link {
+    will-change: box-shadow;
+    transition: box-shadow 0.2s;
+  
+    &:hover {
+      box-shadow: var(--shadow-md);
+  
+      .card__img::after {
+        opacity: 1;
+      }
+    }
+  
+    .card__img {
+      position: relative;
+  
+      &::after { // overlay layer
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: alpha(var(--color-black), 0.6);
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+    }
+  }
+  
+  .card__link {
+    text-decoration: none;
+    display: block;
+    color: inherit;
+  }
+  
+  .card__link-icon {
+    position: absolute;
+    z-index: 1;
+    width: 64px;
+    height: 64px;
+    top: calc(50% - 32px);
+    left: calc(50% - 32px);
+    background-color: alpha(var(--color-white), 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    opacity: 0;
+    transition: opacity 0.2s;
+  
+    .icon {
+      display: block;
+      width: 32px;
+      height: 32px;
+      color: var(--color-black); // icon color
+    }
+  }
+  
+  .card--is-link:hover .card__link-icon {
+    opacity: 1;
+  }
+
+
+
+/* -------------------------------- 
+
+File#: _1_header
+Title: Main Header
+Descr: Accessible website navigation
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+
+:root {
+    --header-height: 50px;
+  
+    @include breakpoint(md) {
+      --header-height: 70px;
+    }
+  }
+  
+  .header {
+    height: var(--header-height);
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: var(--zindex-header);
+  }
+  
+  //.header--expanded {
+    // class added when navigation is visible - small devices only
+ // }
+  
+  .header__container {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  // logo
+  .header__logo {
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+  
+    a, svg, img {
+      display: block;
+    }
+  }
+  
+  // nav
+  .header__nav {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-height: 100vh;
+    background-color: var(--color-bg);
+    box-shadow: var(--shadow-md);
+    overflow: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    font-size: 1.25em; // controls the font-size of all elements (sm)
+  
+    display: none;
+  
+    &::before { // top header bg + border
+      content: '';
+      display: block;
+      position: sticky;
+      top: 0;
+      height: var(--header-height);
+      background: inherit;
+      border-bottom: 1px solid var(--color-contrast-low);
+    }
+  }
+  
+  .header__nav--is-visible {
+    display: block;
+  }
+  
+  .header__nav-inner {
+    padding: var(--space-sm) var(--component-padding) var(--component-padding);
+  }
+  
+  .header__label { // menu label
+    font-size: var(--text-sm);
+    color: var(--color-contrast-medium);
+    margin-bottom: var(--space-sm);
+  }
+  
+  .header__item { // nav list item
+    margin-bottom: var(--space-sm);
+  }
+  
+  .header__link { // link within list item
+    color: var(--color-contrast-higher);
+    text-decoration: none;
+  
+    &:hover, &[aria-current] { // style of :hover + selected link
+      color: var(--color-primary);
+    }
+  }
+  
+  .header__item--divider { // element used to separate nav items
+    height: 1px;
+    width: 100%;
+    background-color: var(--color-contrast-low);
+  }
+  
+  // menu trigger
+  .header__trigger { // menu button
+    position: relative;
+    z-index: 2;
+  }
+  
+  // menu icon
+  .header__trigger-icon {
+    position: relative;
+    display: block;
+    height: 2px;
+    width: 1em;
+    background-color: currentColor;
+    margin-right: var(--space-xxs);
+    transition: 0.2s;
+  
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: inherit;
+      height: inherit;
+      background-color: currentColor;
+      transition: 0.2s;
+    }
+  
+    &::before {
+      transform: translateY(-5px);
+    }
+  
+    &::after {
+      transform: translateY(5px);
+    }
+  }
+  
+  .header__trigger[aria-expanded="true"] .header__trigger-icon {
+    background-color: transparent;
+  
+    &::before {
+      transform: rotate(45deg);
+    }
+  
+    &::after {
+      transform: rotate(-45deg);
+    }
+  }
+  
+  @include breakpoint(md) {
+    .header__nav {
+      // reset
+      position: static;
+      background-color: transparent;
+      width: auto;
+      max-height: none;
+      box-shadow: none;
+      overflow: visible;
+      overscroll-behavior: auto;
+      display: block;
+  
+      font-size: 0.875em; // controls the font-size of all elements (md)
+  
+      &::before {
+        display: none;
+      }
+    }
+  
+    .header__nav-inner {
+      padding: 0; // reset
+    }
+  
+    .header__label { // hide label
+      @include srHide;
+    }
+  
+    .header__list {
+      display: flex;
+      align-items: center;
+    }
+  
+    .header__item {
+      display: inline-block; // flex fallback
+      margin-bottom: 0;
+      margin-left: var(--space-md);
+    }
+  
+    .header__item--divider {
+      height: 1em;
+      width: 1px;
+    }
+  
+    .header__trigger {
+      display: none;
+    }
+  }
+  
+  // no JS fallback
+  html:not(.js) {
+    .header {
+      height: auto;
+      padding-top: var(--space-xs);
+    }
+  
+    .header__trigger {
+      display: none;
+    }
+  
+    .header__container {
+      display: block;
+    }
+  
+    .header__nav {
+      position: static;
+      height: auto;
+      padding: 0;
+      box-shadow: none;
+      overflow: visible;
+      display: block;
+  
+      &::before {
+        display: none;
+      }
+    }
+  
+    .header__nav-inner { 
+      position: static;
+      height: auto;
+      padding: var(--space-md) 0;
+      overflow: visible;
+    }
+  
+    @include breakpoint(md) {
+      .header {
+        height: var(--header-height);
+        padding: 0;
+      }
+  
+      .header__container {
+        display: flex;
+      }
+    }
+  }
+
+  /* -------------------------------- 
+
+File#: _1_main-footer
+Title: Main Footer
+Descr: Footer navigation
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+.main-footer {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .main-footer__logo {
+    flex-shrink: 0;
+    width: 104px; // logo width
+    height: 30px; // logo height
+    display: block;
+  
+    svg, img {
+      display: block;
+      width: inherit;
+      height: inherit;
+    }
+  }
+  
+  .main-footer__item {
+    margin-top: var(--space-xs);
+  }
+  
+  .main-footer__link {
+    color: var(--color-contrast-medium);
+    text-decoration: none;
+  
+    &:hover {
+      color: var(--color-contrast-high);
+    }
+  }
+  
+  // colophon
+  .main-footer__colophon {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .main-footer__social {
+    text-decoration: none;
+    display: inline-block;
+    color: var(--color-contrast-medium);
+  
+    &:hover {
+      color: var(--color-contrast-high);
+    }
+  }
+  
+  @include breakpoint(md) {
+    .main-footer__legend {
+      font-size: var(--text-base);
+    }
+    
+    .main-footer__item {
+      font-size: 0.9em;
+    }
+  }
+
+  /* -------------------------------- 
+
+File#: _1_responsive-sidebar
+Title: Responsive Sidebar
+Descr: Responsive sidebar container
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+// mobile version only (--default) 👇
+.sidebar:not(.sidebar--static) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: var(--zindex-fixed-element);
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+    transition: visibility 0s .3s;
+  
+    &::after { // overlay layer
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: alpha(var(--color-black), 0);
+      transition: background-color .3s;
+      z-index: 1;
+    }
+  
+    .sidebar__panel { // content
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      width: 100%;
+      max-width: 380px;
+      height: 100%;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+      background-color: var(--color-bg);
+      transform: translateX(-100%);
+      transition: .3s;
+    }
+  
+    &.sidebar--right-on-mobile {
+      .sidebar__panel {
+        left: auto;
+        right: 0;
+        transform: translateX(100%);
+      }
+    }
+  
+    &.sidebar--is-visible {
+      visibility: visible;
+      transition: none;
+      
+      &::after {
+        background-color: alpha(var(--color-black), 0.85);
+      }
+  
+      .sidebar__panel {
+        transform: translateX(0);
+        box-shadow: var(--shadow-md);
+      }
+    }
+  }
+  // end mobile version
+  
+  .sidebar__header {
+    background-color: var(--color-bg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 2px solid var(--color-contrast-lower);
+    position: sticky;
+    top: 0;
+  }
+  
+  .sidebar__close-btn {
+    width: 2em;
+    height: 2em;
+    display: flex;
+    border-radius: 50%;
+    background-color: var(--color-bg);
+    box-shadow: var(--shadow-sm);
+    transition: .2s;
+    flex-shrink: 0;
+  
+    &:hover {
+      box-shadow: var(--shadow-md);
+    }
+    
+    .icon {
+      display: block;
+      color: var(--color-contrast-high);
+      margin: auto;
+    }
+  }
+  
+  // desktop version only (--static) 👇
+  .sidebar--static, html:not(.js) .sidebar {
+    flex-shrink: 0;
+    flex-grow: 1;
+  
+    .sidebar__header {
+      display: none;
+    }
+  }
+  
+  .sidebar--sticky-on-desktop {
+    position: sticky;
+    top: var(--space-sm);
+    max-height: calc(100vh - var(--space-sm));
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  // end desktop version
+  
+  .js {
+    .sidebar {
+      opacity: 0; // hide sidebar while it is initialized in JS
+    }
+  
+    .sidebar--loaded {
+      opacity: 1;
+    }
+  }
+  
+  // no-js
+  html:not(.js) .sidebar {
+    position: static;
+  }
+  
+  // detect when the sidebar needs to switch from the mobile layout to a static one - used in JS
+  [class*="sidebar--static"]::before {
+    display: none;
+  }
+  
+  @each $breakpoint, $value in $breakpoints {
+    .sidebar--static\@#{$breakpoint}::before {
+      content: 'mobile';
+      @include breakpoint(#{$breakpoint}) {
+        content: 'static';
+      }
+    }
+  }
+
+
+  /* -------------------------------- 
+
+File#: _1_social-sharing
+Title: Social Sharing
+Descr: Social sharing plugin
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+/* .sharebar {} */
+
+.sharebar__btn {
+  display: inline-block;
+  padding: var(--space-sm);
+  background: var(--color-contrast-lower);
+  border-radius: 50%;
+  transition: .2s;
+
+  .icon {
+    display: block;
+    color: var(--color-contrast-high);
+    transition: color .2s;
+    font-size: 1.2em;
+  }
+
+  &:hover {
+    background-color: var(--color-bg);
+    box-shadow: var(--shadow-sm);
+
+    .icon {
+      color: var(--color-primary);
+    }
+  }
+}
+
+/* -------------------------------- 
+
+File#: _2_carousel
+Title: Carousel
+Descr: Display and cycle through a collection of items
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+:root {
+  --carousel-grid-gap: var(--space-xs);
+  --carousel-item-auto-size: 260px; // min-width value -> used in JS to auto update the carousel items width
+  --carousel-transition-duration: 0.5s;
+}
+
+.carousel {
+  position: relative;
+}
+
+.carousel__list {
+  display: flex;
+  flex-wrap: nowrap;
+  will-change: transform;
+}
+
+.carousel__item {
+  flex-shrink: 0;
+  width: var(--carousel-item-auto-size); 
+  margin-right: var(--carousel-grid-gap);
+  margin-bottom: var(--carousel-grid-gap);
+}
+
+.js {
+  .carousel__list--animating {
+    transition-property: transform;
+    transition-duration: var(--carousel-transition-duration);
+    transition-timing-function: var(--ease-out);
+  }
+
+  .carousel__item { // hide items while the carousel is initialized in JS
+    opacity: 0;
+    margin-bottom: 0;
+  }
+
+  .carousel--loaded .carousel__item { // reveal items
+    opacity: 1;
+  }
+
+  .carousel:not(.carousel--is-dragging) .carousel__list:not(.carousel__list--animating) .carousel__item[tabindex="-1"] > * {
+    visibility: hidden; // hide content of off-canvas items so that they are not focusable 
+  }
+
+  .carousel[data-drag="on"] .carousel__item { // if drag = enabled
+    user-select: none;
+
+    img {
+      pointer-events: none;
+    }
+  }
+}
+
+.carousel__control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: var(--color-bg);
+  border-radius: 50%;
+  box-shadow: var(--shadow-sm);
+  z-index: 1;
+  transition: .2s;
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+  }
+
+  &[disabled] {
+    pointer-events: none;
+    background-color: var(--color-contrast-lower);
+    color: var(--color-contrast-low);
+    box-shadow: none;
+  }
+
+  .icon {
+    display: block;
+    font-size: 20px; // icon size
+  }
+}
+ 
+// carousel dots navigation
+.carousel__navigation { // created in JS
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 10px); // = button size 👇
+  gap: var(--space-xs); // gap among dots
+  justify-content: center;
+  align-items: center;
+  margin-top: var(--space-sm);
+}
+
+.carousel__nav-item {
+  display: inline-block; // grid fallback
+  margin: 0 var(--space-xxxs);
+
+  @supports (grid-area: auto) {
+    margin: 0;
+  }
+
+  button { // dot
+    display: block;
+    position: relative;
+    font-size: 10px; // ⚠️ button size
+    height: 1em;
+    width: 1em;
+    border-radius: 50%;
+    background-color: var(--color-contrast-high);
+    opacity: 0.4;
+    cursor: pointer;
+    transition: background .3s;
+
+    &::before { // focus circle
+      content: '';
+      position: absolute;
+      top: calc(50% - 0.5em);
+      left: calc(50% - 0.5em);
+      font-size: 16px; // focus circle size
+      height: 1em;
+      width: 1em;
+      border-radius: inherit;
+      border: 1px solid var(--color-contrast-high);
+      opacity: 0;
+      transform: scale(0);
+      transition: 0.3s;
+    }
+    
+    &:focus {
+      outline: none;
+      
+      &::before {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  }
+}
+
+.carousel__nav-item--selected button {
+  opacity: 1;
+}
+
+// --pagination
+.carousel__navigation--pagination {
+  grid-template-columns: repeat(auto-fit, minmax(24px, auto));
+
+  .carousel__nav-item button {
+    width: 100%;
+    height: auto;
+    color: var(--color-bg);
+    font-size: var(--text-xs);
+    padding: var(--space-xxxs) var(--space-xxs);
+    border-radius: var(--radius-md);
+    text-align: center;
+
+    &:focus {
+      outline: 1px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+  }
+}
+
+html:not(.js) .carousel__list {
+  overflow: auto;
+}
+
+/* -------------------------------- 
+
+File#: N/A
+Title: Swipe Content
+Descr: A Vanilla JavaScript plugin to detect touch interactions
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+.swipe-content { // demo
+  height: 280px;
+  width: 280px;
+  background-color: var(--color-contrast-low);
+  border-radius: var(--radius-md);
+  cursor: default;
+  transition: background 0.2s;
+
+  &:active {
+    background-color: var(--color-contrast-medium);
+  }
+}
+  
+
+  
+
+// --------------------------------
+
+@import 'custom-style/colors';
+@import 'custom-style/spacing';
+@import 'custom-style/shared-styles';
+@import 'custom-style/typography';
+@import 'custom-style/icons';
+@import 'custom-style/buttons';
+@import 'custom-style/forms';
